@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    environment:
+      POSTGRES_DB: 'contactos_db'
+      POSTGRES_USER: 'root'
+      POSTGRES_PASSWORD: 'Yautja17!'
+      MYSQL_ROOT_PASSWORD: 'Yautja17!'
+    ports:
+      - "3307:3306"
+    networks:
+      - backend
+
+  web:
+    build:
+      context: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
